@@ -20,6 +20,13 @@ public class AdminController : Controller
 
         if (!_categoryService!.IsExist(new Category { Name = "Empty" }))
             _categoryService!.Add(new Category { Name = "Empty" });
+
+        //for (int i = 1; i < 50; i++)
+        //    _categoryService.Add(new Category { Name = "asdkjad " + i.ToString() });
+
+        //for (int i = 1; i < 100; i++)
+        //    _repairerService?.Add(new App.Entities.Entity.Repairer { Name = "asdasad " + i.ToString(), CategoryId = i, RaitingId = 1 });
+
     }
 
     public IActionResult Main(int page = 1, int category = 0)
@@ -87,14 +94,25 @@ public class AdminController : Controller
 
         if (repairer != null)
         {
-            _repairerService.Update(new App.Entities.Entity.Repairer
-            {
-                Name = repairer.Name,
-                Photo = repairer.Photo,
-                RaitingId = repairer.RaitingId,
-                CategoryId = 1
-            });
+            repairer.CategoryId = _categoryService?.Get(_ => _.Name == "Empty").Id;
+            _repairerService.Update(repairer);
         }
+
+        return RedirectToAction("Main", new { area = "admin", page = StaticPageSaver.Page, category = StaticPageSaver.Category });
+    }
+
+    public IActionResult Edit(int id)
+    {
+        string name = _categoryService?.Get(_ => _.Id == id).Name!;
+        CategoryViewModel cat = new CategoryViewModel { CategoryName = name };
+        return View(cat);
+    }
+
+    [HttpPost]
+    public IActionResult Edit(CategoryViewModel cvm)
+    {
+        if (_categoryService?.Get(_ => _.Name == cvm.CategoryName) == null)
+            _categoryService?.Update(new Category { Id = cvm.Id, Name = cvm.CategoryName });
 
         return RedirectToAction("Main", new { area = "admin", page = StaticPageSaver.Page, category = StaticPageSaver.Category });
     }

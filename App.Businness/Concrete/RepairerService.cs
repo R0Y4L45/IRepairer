@@ -31,11 +31,13 @@ public class RepairerService : IRepairerService
         filter == null ? Context.Set<Repairer>().ToList() : Context.Set<Repairer>().Where(filter).ToList();
     public bool Update(Repairer entity)
     {
-        if (Context.Repairer?.FirstOrDefault(_ => _.Id == entity.Id && _.Name == entity.Name) is Repairer t)
+        Repairer? t = Get(_ => _.Id == entity.Id && _.Name == entity.Name);
+        
+        if (t != null)
         {
             Context.Update(t);
             Context.SaveChanges();
-            
+
             return true;
         }
 
