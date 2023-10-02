@@ -1,0 +1,17 @@
+﻿@model CategoryViewModel
+
+<div class="m-4 d-flex justify-content-center">
+    <form asp-area="Admin" asp-controller="Admin" asp-action="AddCategory" enctype="multipart/form-data">
+        <div class="form-control">
+            <label class="pd10">Category Name<span>*</span></label>
+            <div>
+                <input class="d-block" asp-for="CategoryName" placeholder="----" />
+                <span class="text-danger" asp-validation-for="CategoryName" class="fgred" autocomplete="off"></span>
+            </div>
+            <div style="margin-top: 24px">
+                <button class="btn btn-primary btn-lg btn-block" type="submit">APPLY</button>
+            </div>
+        </div>
+    </form>
+</div>
+

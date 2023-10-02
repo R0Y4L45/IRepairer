@@ -1,0 +1,37 @@
+﻿@model RepairerListViewModel
+
+<div class="container-fluid">
+    <div class="text-center">
+        <h1 style="background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%); min-height: 60px;" class="bg-warning">User page</h1>
+    </div>
+
+    @if (!string.IsNullOrEmpty(TempData["message"]?.ToString()))
+    {
+        if (TempData["message"]?.ToString()?.Last() == '!')
+        {
+            <div class="alert alert-danger animate__animated animate__bounceInLeft" role="alert">
+                <strong>Success!</strong> @TempData["message"]?.ToString()
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-success animate__animated animate__bounceInLeft" role="alert">
+                <strong>Success!</strong> @TempData["message"]?.ToString()
+            </div>
+        }
+    }
+
+    <div class="row">
+        <div class="col-12 col-md-3">
+            @await Component.InvokeAsync("Category")
+        </div>
+        <div class="col-12 col-md-9">
+            <div class="table-responsive">
+                <table style="min-height: 450px;" class="min-vh-30 table table-striped table-dark table-hover">
+                    <repairers Items="@Model.Repairers"></repairers>
+                </table>
+                <repairer-pager page-count="@Model.PageCount" current-page="@Model.CurrentPage" _role="true" current-category="@Model.CurrentCategory"></repairer-pager>
+            </div>
+        </div>
+    </div>
+</div>
