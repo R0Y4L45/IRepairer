@@ -1,0 +1,35 @@
+﻿@model CategoryListViewModel
+
+<div class="card border-0 shadow">
+    <div class="card-body p-5">
+        <div class="table-responsive">
+            <table class="table m-0">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Category</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int a = 0;
+
+                        foreach (var item in Model.Categories!)
+                        {
+                            ++a;
+                            <tr>
+                                <th>@a</th>
+                                <td>
+                                    <a style="display:inline;cursor:pointer;" class="text-center list-group-item-action" href="/user?category=@item.Id">
+                                        <p class="text-dark">@item.Name</p>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

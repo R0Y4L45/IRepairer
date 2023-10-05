@@ -1,9 +1,6 @@
 ﻿@model RepairerListViewModel
 
-<div class="container-fluid">
-    <div class="text-center">
-        <h1 style="background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%); min-height: 60px;" class="bg-warning">User page</h1>
-    </div>
+<div class="container-fluid bg-black">
 
     @if (!string.IsNullOrEmpty(TempData["message"]?.ToString()))
     {
@@ -28,7 +25,7 @@
         <div class="col-12 col-md-9">
             <div class="table-responsive">
                 <table style="min-height: 450px;" class="min-vh-30 table table-striped table-dark table-hover">
-                    <repairers Items="@Model.Repairers"></repairers>
+                    <repairers Items="@Model.Repairers" Role="true"></repairers>
                 </table>
                 <repairer-pager page-count="@Model.PageCount" current-page="@Model.CurrentPage" _role="true" current-category="@Model.CurrentCategory"></repairer-pager>
             </div>

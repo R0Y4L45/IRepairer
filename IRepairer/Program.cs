@@ -1,6 +1,9 @@
 using App.Business.Abstract;
 using App.Business.Concrete;
 using App.Entities.DbCon;
+using App.Entities.Entity;
+using IRepairer.Helpers;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace IRepairer;
@@ -12,12 +15,20 @@ public class Program
 
         // Add services to the container.
         builder.Services.AddControllersWithViews();
+
         //Db Add
-        builder.Services.AddDbContext<IRepairerDbContext>(_ => _.UseSqlServer(builder.Configuration["ConnectionStrings:default"]));
+        string conn = builder.Configuration["ConnectionStrings:default"];
+        builder.Services.AddDbContext<CustomIdentityDbContext>(_ => _.UseSqlServer(conn));
+
+        builder.Services.AddIdentity<CustomIdentityUser, CustomIdentityRole>(_ => _.Password.RequiredLength = 5)
+        .AddEntityFrameworkStores<CustomIdentityDbContext>().AddDefaultTokenProviders();
+
         //Services register
-        builder.Services.AddSingleton<IRatingService, RatingService>();
         builder.Services.AddSingleton<ICategoryService, CategoryService>();
         builder.Services.AddSingleton<IRepairerService, RepairerService>();
+        builder.Services.AddSignalR();
+
+        builder.Services.AddAuthentication();
 
         var app = builder.Build();
 
@@ -34,7 +45,10 @@ public class Program
 
         app.UseRouting();
 
+        app.UseAuthentication();
         app.UseAuthorization();
+
+        app.MapHub<ChatHub>("/chatHub");
 
         app.MapControllerRoute(
             name: "userArea",

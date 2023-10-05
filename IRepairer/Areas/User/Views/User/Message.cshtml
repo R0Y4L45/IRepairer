@@ -1,0 +1,30 @@
+﻿
+<div>
+    <input id="messageInput" />
+    <h1 id="message"></h1>
+    <button id="sendButton"></button>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.11/signalr.min.js"></script>
+<script>
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/chatHub") 
+        .build();
+
+    connection.start().catch(err => console.error(err));
+
+    // Handle incoming messages
+    connection.on("ReceiveMessage", (message) => {
+        // Handle the received message (e.g., display it in the UI)
+        document.createElement("p",).innerHTML = message;
+        console.log(`User => ${message}`);
+    });
+
+    // Send a message
+    document.getElementById("sendButton").addEventListener("click", () => {
+        const message = document.getElementById("messageInput").value;
+
+        // Call the SendMessage method on the server
+        connection.invoke("SendMessage", message).catch(err => console.error(err));
+    });
+</script>

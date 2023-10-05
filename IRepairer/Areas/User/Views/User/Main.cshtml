@@ -1,4 +1,4 @@
-﻿@* @model BooksListViewModel
+﻿@model RepairerListViewModel
 
 <div class="container-fluid">
     <div class="text-center">
@@ -28,11 +28,10 @@
         <div class="col-12 col-md-9">
             <div class="table-responsive">
                 <table style="min-height: 450px;" class="min-vh-30 table table-striped table-dark table-hover">
-                    <books Area=false Items="@Model.Books"></books>
+                    <repairers role="false" Items="@Model.Repairers"></repairers>
                 </table>
-                <books-pager page-count="@Model.PageCount" current-page="@Model.CurrentPage" role="@Model.Role" current-category="@Model.CurrentCategory"></books-pager>
+                <repairer-pager page-count="@Model.PageCount" current-page="@Model.CurrentPage" _role="false" current-category="@Model.CurrentCategory"></repairer-pager>
             </div>
         </div>
     </div>
 </div>
- *@

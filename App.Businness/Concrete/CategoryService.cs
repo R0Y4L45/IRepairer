@@ -7,12 +7,10 @@ namespace App.Business.Concrete;
 
 public class CategoryService : ICategoryService
 {
-    public IRepairerDbContext Context { get; }
+    public CustomIdentityDbContext Context { get; }
 
-    public CategoryService()
-    {
-        Context = new IRepairerDbContext();
-    }
+    public CategoryService() => Context = new CustomIdentityDbContext();
+
 
     public void Add(Category entity)
     {
@@ -38,14 +36,6 @@ public class CategoryService : ICategoryService
             Context.SaveChanges();
             return true;
         }
-        return false;
-    }
-
-    public bool IsExist(Category category)
-    {
-        if(Get(_ => _.Name == category.Name) != null)
-            return true;
-
         return false;
     }
 }

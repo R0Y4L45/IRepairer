@@ -7,12 +7,9 @@ namespace App.Business.Concrete;
 
 public class RepairerService : IRepairerService
 {
-    public IRepairerDbContext Context { get; }
+    public CustomIdentityDbContext Context { get; }
 
-    public RepairerService()
-    {
-        Context = new IRepairerDbContext();
-    }
+    public RepairerService() => Context = new CustomIdentityDbContext();
 
     public void Add(Repairer entity)
     {
@@ -31,15 +28,15 @@ public class RepairerService : IRepairerService
         filter == null ? Context.Set<Repairer>().ToList() : Context.Set<Repairer>().Where(filter).ToList();
     public bool Update(Repairer entity)
     {
-        Repairer? t = Get(_ => _.Id == entity.Id && _.Name == entity.Name);
-        
-        if (t != null)
-        {
-            Context.Update(t);
-            Context.SaveChanges();
+        //Repairer? t = Get(_ => _.Id == entity.Id && _.Name == entity.Name);
 
-            return true;
-        }
+        //if (t != null)
+        //{
+        //    Context.Update(t);
+        //    Context.SaveChanges();
+
+        //    return true;
+        //}
 
         return false;
     }

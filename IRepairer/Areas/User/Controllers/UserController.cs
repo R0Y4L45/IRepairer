@@ -1,20 +1,22 @@
 ﻿using App.Business.Abstract;
 using App.Entities.Entity;
 using IRepairer.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IRepairer.Areas.User.Controllers;
 
-public class RepairerUserController : Controller
+[Area("User")]
+[Authorize(Roles = "Admin, User")]
+
+public class UserController : Controller
 {
     private readonly ICategoryService? _categoryService;
-    private readonly IRatingService? _ratingService;
     private readonly IRepairerService? _repairerService;
 
-    public RepairerUserController(ICategoryService? categoryService, IRatingService? ratingService, IRepairerService? repairerService)
+    public UserController(ICategoryService? categoryService, IRepairerService? repairerService)
     {
         _categoryService = categoryService;
-        _ratingService = ratingService;
         _repairerService = repairerService;
     }
 
@@ -34,13 +36,13 @@ public class RepairerUserController : Controller
         repairerList = (from repairer in _repairerService?.GetList()
                         join _category in model.CurrentCategory == 0 ? _categoryService?.GetList()! : _categoryService?.GetList(c => c.Id == model.CurrentCategory)!
                         on repairer.CategoryId equals _category.Id
-                        join rating in _ratingService?.GetList()!
-                        on repairer.RaitingId equals rating.Id
                         select new RepairerViewModel
                         {
-                            UserName = repairer.Name,
-                            Category = _category.Name,
-                            Rating = rating.Rating
+                            Id = repairer.Id,
+                            //UserName = repairer.Name,
+                            Photo = repairer.Photo,
+                            Rating = repairer.Rating,
+                            Category = _category.Name
                         });
 
         StaticPageSaver.RepairerCount = repairerList.Count();
@@ -56,5 +58,8 @@ public class RepairerUserController : Controller
         return View(model);
     }
 
-
+    public IActionResult Message(int id)
+    {
+        return View();
+    }
 }

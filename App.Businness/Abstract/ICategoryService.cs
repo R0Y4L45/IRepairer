@@ -4,7 +4,4 @@ using App.Entities.Entity;
 
 namespace App.Business.Abstract;
 
-public interface ICategoryService : IEntityRepository<Category, IRepairerDbContext>
-{
-    bool IsExist(Category category);
-}
+public interface ICategoryService : IEntityRepository<Category, CustomIdentityDbContext> { }
