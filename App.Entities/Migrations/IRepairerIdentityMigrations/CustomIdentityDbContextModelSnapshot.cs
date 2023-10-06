@@ -152,6 +152,7 @@ namespace App.Entities.Migrations.IRepairerIdentityMigrations
                         .HasColumnType("int");
 
                     b.Property<string>("SenderId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
@@ -172,9 +173,6 @@ namespace App.Entities.Migrations.IRepairerIdentityMigrations
                     b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Photo")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<double>("Rating")
                         .HasColumnType("float");
 
@@ -182,9 +180,10 @@ namespace App.Entities.Migrations.IRepairerIdentityMigrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("WorkId")
+                    b.Property<int?>("WorkId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -337,7 +336,8 @@ namespace App.Entities.Migrations.IRepairerIdentityMigrations
                     b.HasOne("App.Entities.Entity.CustomIdentityUser", "Sender")
                         .WithMany("Messages")
                         .HasForeignKey("SenderId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Sender");
                 });
@@ -352,7 +352,8 @@ namespace App.Entities.Migrations.IRepairerIdentityMigrations
                     b.HasOne("App.Entities.Entity.CustomIdentityUser", "User")
                         .WithMany("Repairers")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Category");
 

@@ -3,11 +3,12 @@ using App.Entities.Entity;
 using IRepairer.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace IRepairer.Areas.User.Controllers;
 
 [Area("User")]
-[Authorize(Roles = "Admin, User")]
+//[Authorize(Roles = "Admin, User")]
 
 public class UserController : Controller
 {
@@ -39,8 +40,8 @@ public class UserController : Controller
                         select new RepairerViewModel
                         {
                             Id = repairer.Id,
+                            UserId = repairer.UserId,
                             //UserName = repairer.Name,
-                            Photo = repairer.Photo,
                             Rating = repairer.Rating,
                             Category = _category.Name
                         });
@@ -60,6 +61,8 @@ public class UserController : Controller
 
     public IActionResult Message(int id)
     {
+        string userId = _repairerService!.Get(_ => _.Id == id).UserId;
+        ViewBag.Recivier = userId;
         return View();
     }
 }

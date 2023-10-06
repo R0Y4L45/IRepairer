@@ -48,7 +48,7 @@ public class RepairersTagHelper : TagHelper
         sb.AppendFormat("<td class=\"text-center\"> {0} </td>", item.UserName);
         sb.AppendFormat("<td class=\"text-center\"> {0} </td>", item.Category);
         sb.AppendFormat("<td class=\"text-center\"> {0} </td>", item.Rating);
-        sb.AppendFormat("<td class=\"text-center\"><ul class=\"list-inline mb-0\"><li class=\"list-inline-item dropdown\"><a class=\"text-muted dropdown-toggle font-size-18 px-2\" href=\"#\" role=\"button\" data-bs-toggle=\"dropdown\" aria-haspopup=\"true\"><i class=\"bx bx-dots-vertical-rounded\"></i></a><div class=\"dropdown-menu dropdown-menu-end\"><a class=\"dropdown-item link-danger\" href=\"/Admin/Admin/DeleteRepairer/{0}\"> Delete </a></div></li></ul></td>", item.Id);
+        sb.AppendFormat("<td class=\"text-center\"><ul class=\"list-inline mb-0\"><li class=\"list-inline-item dropdown\"><a class=\"text-muted dropdown-toggle font-size-18 px-2\" href=\"#\" role=\"button\" data-bs-toggle=\"dropdown\" aria-haspopup=\"true\"><i class=\"bx bx-dots-vertical-rounded\"></i></a><div class=\"dropdown-menu dropdown-menu-end\"><a class=\"dropdown-item link-danger\" href=\"/Admin/Admin/DeleteRepairer/{0}\"> Delete </a></div></li></ul></td>", item.UserId);
         sb.Append("</tr>");
 
         return sb;

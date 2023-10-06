@@ -173,7 +173,7 @@ namespace App.Entities.Migrations.IRepairerIdentityMigrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    SenderId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    SenderId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     RecipientId = table.Column<int>(type: "int", nullable: false),
                     MessageItem = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -195,12 +195,11 @@ namespace App.Entities.Migrations.IRepairerIdentityMigrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    Photo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Rating = table.Column<double>(type: "float", nullable: false),
                     TotalRatingCount = table.Column<long>(type: "bigint", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: true),
-                    WorkId = table.Column<int>(type: "int", nullable: false)
+                    WorkId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {

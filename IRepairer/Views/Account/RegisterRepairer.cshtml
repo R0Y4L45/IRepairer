@@ -1,7 +1,7 @@
 ﻿@{
     Layout = null;
 }
-@model RegisterUserViewModel
+@model RegisterRepairerViewModel
 
 <div class="container">
     <div id="signupbox" style="margin-top:50px;"
@@ -17,11 +17,10 @@
                 <div style="display:none;" id="login-alert"
                      class="alert alert-danger col-sm-12">
                 </div>
-                <form asp-area="" asp-controller="Account" asp-action="RegisterUser" method="post"
+                <form asp-area="" asp-controller="Account" asp-action="RegisterRepairer" method="post"
                       role="form" class="form-horizontal">
                     <div class="form-group">
                         <label asp-for="Username" class="col-md-3 control-label"></label>
-
                         <div class="col-md-9">
                             <input asp-for="Username" class="form-control" placeholder="Username" />
                             <span asp-validation-for="Username"></span>
@@ -39,6 +38,25 @@
                         <div class="col-md-9">
                             <input asp-for="Email" class="form-control" placeholder="Email" />
                             <span asp-validation-for="Email"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Photo" class="col-md-3 control-label"></label>
+                        <div class="col-md-9">
+                            <input asp-for="Photo" class="form-control" placeholder="Photo" />
+                            <span asp-validation-for="Photo"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CategoryId" class="col-md-3 control-label"></label>
+                        <div class="mb-3 col-3">
+                            <select asp-for="CategoryId" class="form-control">
+                                @foreach (var c in Model?.Categories!)
+                                {
+                                    <option value="@c.Id">@c.Name</option>
+                                }
+                            </select>
+                            <span asp-validation-for="CategoryId"></span>
                         </div>
                     </div>
                     <div class="form-group">

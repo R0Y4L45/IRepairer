@@ -61,9 +61,8 @@ public class AdminController : Controller
                             into joined from cat in joined.DefaultIfEmpty()
                             select new RepairerViewModel
                             {
-                                Id = repairer.Id,
+                                UserId = repairer.UserId,
                                 //UserName = repairer.Name,
-                                Photo = repairer.Photo,
                                 Category = cat != null ? cat.Name : "No category",
                                 Rating = repairer.Rating
                             });
@@ -73,9 +72,8 @@ public class AdminController : Controller
                             on repairer.CategoryId equals _category.Id
                             select new RepairerViewModel
                             {
-                                Id = repairer.Id,
+                                UserId = repairer.UserId,
                                 //UserName = repairer.Name,
-                                Photo = repairer.Photo,
                                 Category = _category.Name,
                                 Rating = repairer.Rating
                             });
