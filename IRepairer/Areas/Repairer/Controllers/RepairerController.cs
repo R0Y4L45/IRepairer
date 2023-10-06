@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace IRepairer.Areas.Repairer.Controllers;
 
 [Area("Repairer")]
-//[Authorize(Roles = "Admin, Repairer")]
+[Authorize(Roles = "Admin, Repairer")]
 
 public class RepairerController : Controller
 {

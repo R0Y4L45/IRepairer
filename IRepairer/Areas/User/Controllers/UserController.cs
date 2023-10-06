@@ -3,13 +3,11 @@ using App.Entities.Entity;
 using IRepairer.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace IRepairer.Areas.User.Controllers;
 
 [Area("User")]
-//[Authorize(Roles = "Admin, User")]
-
+[Authorize(Roles = "Admin, User")]
 public class UserController : Controller
 {
     private readonly ICategoryService? _categoryService;
